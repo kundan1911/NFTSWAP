@@ -35,7 +35,7 @@ const Speciality = () => {
         <div class='logos-slide'>
           {Array.from({ length: 7 }, (_, i) => (
             <div key={i} className='Card'>
-              <img src={"/Slide/" + ++i + ".webp"} alt='' />
+              <img src={"/Slide/" + ++i + ".webp"} alt='x' />
               <Text textAlign={"center"} fontSize={{ base: "sm", lg: "xl" }} fontWeight={"bold"} color={"gray.300"} my={{ base: 0, md: 5 }}>
                 {x[--i]}
               </Text>

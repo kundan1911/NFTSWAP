@@ -22,9 +22,10 @@ const NavLink = (props) => {
       rounded={"md"}
       _hover={{
         textDecoration: "none",
+        color: "black",
         bg: useColorModeValue("gray.200", "gray.700"),
       }}
-      href={"#"}>
+      href={"/create-post"}>
       {children}
     </Box>
   );

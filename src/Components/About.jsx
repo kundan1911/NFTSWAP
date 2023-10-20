@@ -6,7 +6,7 @@ const About = () => {
     <Grid pos={'relative'} height={'80vh'} my={5} templateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)" }} gap={10} justifyItems={{ base: "center", md: "stretch" }} alignContent={'center'}>
        <div className='hellBlurPurpleLeft'></div>
         <GridItem>
-            <img width={"100%"} src="/Test1.png" alt="" />
+            <img width={"100%"} src="/Test1.png" alt="x" />
         </GridItem>
         <GridItem>
             <span className='InsetTextBlue'>About Us</span>

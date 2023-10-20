@@ -1,8 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
 import { Box, Container, Stack, SimpleGrid, Text, VisuallyHidden, chakra, useColorModeValue } from "@chakra-ui/react";
-import { FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
 import {RiTwitterXFill} from 'react-icons/ri'
 import {BiLogoDiscord} from 'react-icons/bi'
 import {AiFillLinkedin} from 'react-icons/ai'
