@@ -1,6 +1,7 @@
 import { LockIcon } from "@chakra-ui/icons";
 import { Box, Heading, Text, Stack, Avatar, useColorModeValue, Grid, Button, HStack } from "@chakra-ui/react";
 
+
 export default function MarketCard({ title, des, imgs = [], author, authorImg, value, acceptTance={name: "Hasabulla", img: ""}, status = true }) {
   return (
     <Box
