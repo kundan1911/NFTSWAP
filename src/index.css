@@ -1,13 +1,280 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0 !important  ;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .hellBlurBlueRight {
+    background-color: rgba(169, 48, 255, .6);
+    filter: blur(100px);
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: -100px;
+    right: -100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Card {
+    flex: 0 0 auto;
+    aspect-ratio: 1/1;
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 20px;
+    padding: 1%;
+    margin: 0 20px;
+  }
+
+  .logos:before,
+  .logos:after {
+    width: 100px !important;
+    height: 100%;
+  }
+}
+
+.Logo {
+  background-image: linear-gradient(0deg, rgb(2, 86, 242) 0%, rgb(152, 156, 164) 100%);
+  background-clip: Text;
+  color: transparent;
+  font-size: 28px;
+  font-family: "Jost", "Jost Placeholder", sans-serif;
+  font-weight: bolder;
+}
+
+.BoldPoints {
+  font-weight: bold;
+}
+
+.InsetTextBlue {
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  padding: 2% 4%;
+  border-radius: 20px;
+  box-shadow: inset 0 0 10px rgb(27, 128, 182);
+}
+
+.InsetTextPurple {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 1% 3%;
+  border-radius: 20px;
+  box-shadow: inset 0 0 10px #a66be180;
+}
+
+.X {
+  transition: font-size .2s ease-in-out;
+}
+
+.Card {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.InsetExpCard {
+  height: 30vh;
+  box-shadow: inset 0 0 10px rgb(27, 128, 182);
+  padding: 10%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all .2s ease-in-out;
+
+}
+
+.Faq {
+  border-radius: 20px;
+  padding: 5%;
+  background-color: rgb(27, 128, 182);
+}
+
+.InsetExpCard2 {
+  width: 100%;
+  box-shadow: inset 0 0 10px rgb(27, 128, 182);
+  padding: 6% 10%;
+  border-radius: 20px;
+  transition: all .2s ease-in-out;
+
+}
+
+.InsetExpCardDotted {
+  width: 100%;
+  height: 120%;
+  border: 1.5px dashed rgb(27, 128, 182);
+  padding: 6% 10%;
+  border-radius: 10px;
+  transition: all .2s ease-in-out;
+
+}
+
+.InsetExpCard2:hover {
+  box-shadow: inset 0 0 30px #a66be180;
+}
+
+.InsetExpCard:hover {
+  box-shadow: inset 0 0 30px rgb(27, 128, 182);
+}
+
+.InsetExpCard:hover>.X {
+  font-size: 30px !important;
+  color: white !important;
+}
+
+
+.InsetExpCard img {
+  border-radius: 40px;
+  padding: 5%;
+  background: linear-gradient(180deg, #00c6ff, #2602b2);
+}
+
+.bn30 {
+  border: 5em;
+  cursor: pointer;
+  outline: none;
+  font-size: 16px;
+  -webkit-transform: translate(0);
+  transform: translate(0);
+  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+  padding: 0.7em 2em;
+  border-radius: 65px;
+  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
+  -webkit-transition: box-shadow 0.25s;
+  transition: box-shadow 0.25s;
+  color: white;
+}
+
+.bn30 .text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+}
+
+.bn30:after {
+  content: "";
+  border-radius: 18px;
+  position: absolute;
+  margin: 4px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background: #0e0e10;
+}
+
+.bn30:hover {
+  background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+  box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+}
+
+.bn30:hover .text {
+  background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+}
+
+.Text-grad {
+  background-image: linear-gradient(90deg, hsl(228, 98%, 48%) 0%, hsla(232, 37%, 47%, 0.82) 17.227%, hsl(223, 98%, 33%) 39.0864%, hsl(237, 66%, 55%) 54.7428%, hsla(232, 98%, 48%, 0.99) 76.353%, var(--token-45f82e33-10ac-438a-9d06-8cd2d66b6d13, rgb(22, 52, 202)) 100%);
+  background-clip: Text;
+  color: transparent;
+}
+
+.hellBlurBlueRight {
+  background-color: rgba(169, 48, 255, .6);
+  filter: blur(100px);
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: -50px;
+  right: -8vw;
+}
+
+.hellBlurPurpleLeft {
+  background-color: #4568dc;
+  filter: blur(150px);
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: -100px;
+  left: -30vw;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.logos {
+  display: flex;
+  overflow: hidden;
+  padding: 60px 0;
+  position: relative;
+}
+
+.logos:before,
+.logos:after {
+  position: absolute;
+  top: 0;
+  width: 450px;
+  height: 100%;
+  content: "";
+  z-index: 2;
+}
+
+.logos:before {
+  left: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+}
+
+.logos:after {
+  right: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+}
+
+.logos:hover .logos-slide {
+  animation-play-state: paused;
+}
+
+.logos-slide {
+  display: flex;
+  animation: 35s slide infinite linear;
+}
+
+.Card {
+  flex: 0 0 auto;
+  aspect-ratio: 1/1;
+  width: 350px;
+  height: 350px;
+  border-radius: 20px;
+  padding: 1%;
+  margin: 0 20px;
+}
+
+.Card img {
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.Card h3 {
+  margin-bottom: 10px;
 }
