@@ -31,8 +31,8 @@ const Speciality = () => {
         unique.
       </Text>
       </div>
-      <div class='logos'>
-        <div class='logos-slide'>
+      <div className='logos'>
+        <div className='logos-slide'>
           {Array.from({ length: 7 }, (_, i) => (
             <div key={i} className='Card'>
               <img src={"/Slide/" + ++i + ".webp"} alt='x' />

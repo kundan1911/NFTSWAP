@@ -1,18 +1,18 @@
-import {
-  Box,
-  Flex,
-  HStack,
-  IconButton,
-  useDisclosure,
-  useColorModeValue,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Flex, HStack, IconButton, useDisclosure, useColorModeValue, Stack } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-const Links = ["About", "Collection", "Work", "Roadmap", "Create Post", "Marketplace"];
+const Links = [
+  { N: "About", L: "/About" },
+  { N: "Collection", L: "/Collection" },
+  { N: "Work", L: "/Work" },
+  { N: "Roadmap", L: "/Roadmap" },
+  { N: "Create Post", L: "/create-post" },
+  { N: "Marketplace", L: "/Marketplace" },
+];
 
 const NavLink = (props) => {
   const { children } = props;
+  console.log(props);
 
   return (
     <Box
@@ -25,7 +25,7 @@ const NavLink = (props) => {
         color: "black",
         bg: useColorModeValue("gray.200", "gray.700"),
       }}
-      href={"/create-post"}>
+      href={props.X}>
       {children}
     </Box>
   );
@@ -43,7 +43,9 @@ export default function Navbar() {
 
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "none", lg: "flex" }}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink X={link.L} key={link.N}>
+                  {link.N}
+                </NavLink>
               ))}
               <a href='/'>
                 <button className='bn30'>Contact Us</button>
@@ -52,7 +54,7 @@ export default function Navbar() {
           </HStack>
           <IconButton
             bg={"transparent"}
-            color={'white'}
+            color={"white"}
             size={"lg"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
@@ -65,7 +67,9 @@ export default function Navbar() {
           <Box pb={4} display={{ lg: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink X={link.L} key={link.N}>
+                  {link.N}
+                </NavLink>
               ))}
             </Stack>
           </Box>
