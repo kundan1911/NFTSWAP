@@ -38,7 +38,7 @@ export default function MarketCard({ title, des, imgs = [], author, authorImg, v
           ))}
         </Grid>
       </Stack>
-      <Stack color={"gray.500"} mt={6} direction={"row"} spacing={4} align={"center"}>
+      <Stack color={"gray.500"} mt={6} direction={{base: "row", md:"column", xl:"row"}} spacing={4} align={"center"}>
         <Avatar src={authorImg} />
         <Stack direction={"column"} spacing={0} fontSize={"sm"}>
           <Text color={"black"} fontWeight={600}>

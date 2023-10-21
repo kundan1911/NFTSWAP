@@ -66,7 +66,7 @@ const MarketPlace = () => {
     <>
       <DrawerExample />
 
-      <Grid p={6} gap={5} templateColumns={"repeat(4,1fr)"}>
+      <Grid p={6} gap={5} templateColumns={{base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg:"repeat(3,1fr)"}}>
         <MarketCard
           title={"This NFT/collection is available to cop! 👀"}
           des={"Anyone interested to these NFTs?"}
