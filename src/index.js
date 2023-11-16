@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { ChakraProvider, extendTheme} from "@chakra-ui/react";
+import { configureChains, mainnet, WagmiConfig, createClient } from "wagmi";
+import { publicProvider } from "wagmi/providers/public";
 
 const colors = {
   black: "#000"
@@ -28,11 +30,27 @@ const theme = extendTheme({
   },
 })
 
+
+
+const { provider, webSocketProvider } = configureChains(
+  [mainnet],
+  [publicProvider()]
+);
+
+const client = createClient({
+  autoConnect: true,
+  provider,
+  webSocketProvider,
+});
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
+    <WagmiConfig client={client}>
       <App />
+      </WagmiConfig>
     </ChakraProvider>
   </React.StrictMode>
 );

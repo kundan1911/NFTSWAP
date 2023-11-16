@@ -4,7 +4,7 @@ import About from "../Components/About";
 import Expertise from "../Components/Expertise";
 import Speciality from "../Components/Speciality";
 import { Stack } from "@chakra-ui/react";
-import RoadMap from "../Components/RoadMap";
+import RoadMap from "../Pages/RoadMap";
 import Work from "../Components/Work";
 import Faq from "../Components/Faq";
 import Contact from "../Components/Form";

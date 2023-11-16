@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import GetNfts from "../Components/GetNft";
 import {
   Text,
   HStack,
@@ -306,7 +307,7 @@ const Form3 = ({ formData, setFormData }) => {
               Add NFT Collection
             </Text>
             <RadioGroup onChange={setValue} value={value}>
-              <Stack>
+              {/* <Stack>
                 {NFT.map((item, index) => {
                   return (
                     <Radio size={"lg"} value={++index}>
@@ -322,7 +323,8 @@ const Form3 = ({ formData, setFormData }) => {
                 {/* // <Radio value='1'>First</Radio>
                 // <Radio value='2'>Second</Radio>
                 // <Radio value='3'>Third</Radio> */}
-              </Stack>
+              {/* </Stack> */} */}
+              <GetNfts />
             </RadioGroup>
           </GridItem>
           <GridItem
@@ -442,7 +444,7 @@ export default function Multistep() {
           <Text fontSize={"lg"} fontWeight={"semibold"}>
             {Page[step - 1]}
           </Text>
-        </HStack>
+        </HStack>x
         {step === 4 ? null : (
           <Button
             w='7rem'
