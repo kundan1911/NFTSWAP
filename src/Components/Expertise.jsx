@@ -2,11 +2,11 @@ import { Text, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 
 const exp = [
-    { Title: "Top Collection", Des: 'In the context of "High Quality NFT Collections," it suggests that the collection consists of NFTs.', img: "/VidIcon.svg" },
-    { Title: "Best Source", Des: "Struggled to monetize their work due to the ease of replication, can now create limited editions.", img: "/DbIcon.svg" },
+    { Title: "Community-Driven", Des: 'Join a vibrant community passionate about digital assets. Engage in discussions, share insights, and discover new opportunities.', img: "/VidIcon.svg" },
+    { Title: "Low Fees, Fair Transactions", Des: "Benefit from minimal fees and transparent pricing. Enjoy fair value exchanges without hidden costs.", img: "/DbIcon.svg" },
     {
-        Title: "Best Regulars",
-        Des: "One of the most prominent domains impacted by NFTs is the art world. Digital artists, who previously.",img: "/BadgeIcon.svg"
+        Title: "Secure Escrow Services",
+        Des: "Trust our secure escrow services for worry-free transactions. Your assets are protected every step of the way",img: "/BadgeIcon.svg"
     },
     { Title: "Large Society", Des: "Compensation for their creations. High-profile artists have embraced NFTs, producing unique.", img: "/PeopleIcon.svg" },
 ];
@@ -14,8 +14,8 @@ const exp = [
 const Expertise = () => {
     return (
         <div style={{ textAlign: "center", margin:'15% 0' }}>
-            <span className='InsetTextPurple'>Our Expertise</span>
-            <div style={{width:"80%", margin:'auto'}}>
+            <span className='InsetTextPurple'>Key Features</span>
+            {/* <div style={{width:"80%", margin:'auto'}}>
             <Text my={4} fontSize={{base:'xl',md:"4xl"}} fontWeight={"bold"}>
                 Comprehensive Answers for your NFT Inquiries
             </Text>
@@ -23,7 +23,7 @@ const Expertise = () => {
                 NFTs are blockchain-based tokens that represent ownership of a specific asset, such as digital art, music, videos, virtual real
                 estate, or even virtual pets.
             </Text>
-            </div>
+            </div> */}
             <Grid templateColumns={{base: '1fr', md:'repeat(2,1fr)', lg:"repeat(4,1fr)"}} gap={5}>
                 {exp.map((e, index) => (
                     <GridItem key={e.Title} className="InsetExpCard" pos={'relative'}>

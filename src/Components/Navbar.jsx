@@ -1,14 +1,27 @@
-import { Box, Flex, HStack, IconButton, useDisclosure, useColorModeValue, Stack } from "@chakra-ui/react";
+import { Box, Flex, HStack, IconButton, useDisclosure, useColorModeValue, Stack ,Button} from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+// import { ethers , BrowserProvider} from 'ethers';
 
 const Links = [
-  { N: "About", L: "/About" },
-  { N: "Collection", L: "/Collection" },
-  { N: "Work", L: "/Work" },
-  { N: "Roadmap", L: "/Roadmap" },
   { N: "Create Post", L: "/create-post" },
-  { N: "Marketplace", L: "/Marketplace" },
+  { N: "Direct Swap", L: "/DirectTrade" },
+  { N: "Posts", L: "/Posts" },
+  { N: "Orders", L: "/Orders" },
 ];
+
+function DrawerExample(props) {
+  const {address, isConnected, connect} = props;
+  return (
+    <div style={{ width: "100%", margin: "auto", textAlign: "end", padding: "2%" }}>
+      <Button colorScheme='teal' onClick={connect}>
+      {isConnected ? (address.slice(0,4) +"..." +address.slice(38)) : "Connect"}
+      </Button>
+    </div>
+  );
+}
+
+
 
 const NavLink = (props) => {
   const { children } = props;
@@ -31,7 +44,7 @@ const NavLink = (props) => {
   );
 };
 
-export default function Navbar() {
+export default function Navbar(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -39,8 +52,9 @@ export default function Navbar() {
       <Box px={4} my={4}>
         <Flex h={16} alignItems={"center"} justifyContent={{ base: "space-between", lg: "center" }}>
           <HStack spacing={8} alignItems={"center"}>
+          <a href='/'>
             <span className='Logo'>TUSKERS</span>
-
+            </a>
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "none", lg: "flex" }}>
               {Links.map((link) => (
                 <NavLink X={link.L} key={link.N}>
@@ -75,6 +89,7 @@ export default function Navbar() {
           </Box>
         ) : null}
       </Box>
+      <ConnectButton />
     </>
   );
 }

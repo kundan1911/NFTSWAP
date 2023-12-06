@@ -3,7 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { ChakraProvider, extendTheme} from "@chakra-ui/react";
-import { configureChains, mainnet, WagmiConfig, createClient } from "wagmi";
+import { configureChains, WagmiConfig, createConfig } from "wagmi";
+import { mainnet, polygon, optimism, arbitrum} from 'wagmi/chains';
+import '@rainbow-me/rainbowkit/styles.css';
+import { getDefaultWallets,RainbowKitProvider,} from '@rainbow-me/rainbowkit';
 import { publicProvider } from "wagmi/providers/public";
 
 const colors = {
@@ -32,25 +35,32 @@ const theme = extendTheme({
 
 
 
-const { provider, webSocketProvider } = configureChains(
-  [mainnet],
+const { chains, publicClient } = configureChains(
+  [mainnet, polygon, optimism, arbitrum],
   [publicProvider()]
 );
 
-const client = createClient({
-  autoConnect: true,
-  provider,
-  webSocketProvider,
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  projectId: 'bf3c2c1b6f185af66837b54609b3cb0b',
+  chains
 });
 
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient
+})
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-    <WagmiConfig client={client}>
+    <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider chains={chains}>
       <App />
-      </WagmiConfig>
+      </RainbowKitProvider>
+    </WagmiConfig>
     </ChakraProvider>
   </React.StrictMode>
 );

@@ -6,20 +6,20 @@ const Hero = () => {
     <Grid pos={'relative'} overflow={'unset'} my={'20'} templateColumns={{ base: "repeat(1,1fr)", md: "3fr 2fr" }} justifyItems={{ base: "center", md: "stretch" }}>
       <GridItem textAlign={"start"}>
         <Text fontSize={{ base: "4xl", lg: "6xl" }} fontWeight={"bold"}>
-          Explore, Locate,
+        Swap your NFTs in a safe
         </Text>
         <Text fontSize={{ base: "4xl", lg: "6xl" }} className='Text-grad' fontWeight={"bold"}>
-          Sell Extraordinary
+        and secure way, your way!
         </Text>
         <Text fontSize={"xl"} my={3}>
-          Marketplace for Monster Character Collections Non-Fungible Tokens NFTs
+        Tuskers provides a secure escrow to let you swap your NFTs with others. At no point in time does Tuskersor anyone else have access to your NFTs or funds.
         </Text>
         <HStack my={5}>
-          <a href='/'>
-            <button className='bn30'>Explore</button>
+          <a href='/create-post'>
+            <button className='bn30'>Create Post</button>
           </a>
-          <a href='/'>
-            <button className='bn30'>Explore</button>
+          <a href='/DirectTrade'>
+            <button className='bn30'>Direct Swap</button>
           </a>
         </HStack>
       </GridItem>

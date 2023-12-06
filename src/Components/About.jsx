@@ -10,12 +10,12 @@ const About = () => {
         </GridItem>
         <GridItem>
             <span className='InsetTextBlue'>About Us</span>
-            <Text my={4} fontSize={'3xl'} fontWeight={'bold'}>Hight Quality NFT Collections</Text>
-            <Text>In the context of "High Quality NFT Collections," it suggests that the collection consists of NFTs that have </Text>
-            <ol>
+            <Text my={4} fontSize={'3xl'} fontWeight={'bold'}>Trade Unique NFTs Directly with Peers!</Text>
+            <Text>Explore a new era of decentralized trading. Swap NFTs effortlessly and securely on Tuskers.</Text>
+            {/* <ol>
                 <li><span className='BoldPoints'>Digital Art</span>: Exquisite and original artwork crafted by renowned artists or emerging talents.</li>
                 <li><span className='BoldPoints'>Collectibles</span>: Rare and limited-edition digital collectibles, such as virtual trading cards, virtual pets, or other unique items.</li>
-            </ol>
+            </ol> */}
         </GridItem>
     </Grid>
   )
