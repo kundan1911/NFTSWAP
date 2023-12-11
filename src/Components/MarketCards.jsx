@@ -2,7 +2,7 @@ import { LockIcon } from "@chakra-ui/icons";
 import { Box, Heading, Text, Stack, Avatar, useColorModeValue, Grid, Button, HStack } from "@chakra-ui/react";
 
 
-export default function MarketCard({ title, des, imgs = [], author, ExpiryDate, value, acceptTance={name: "Hasabulla", img: ""}, status = true }) {
+export default function MarketCard({ title, des, imgs = [], author, ExpiryDate, value, acceptTance={name: "Hasabulla", img: ""}, status = true ,chainId}) {
   return (
     <Box
       maxW={"400px"}
@@ -16,6 +16,7 @@ export default function MarketCard({ title, des, imgs = [], author, ExpiryDate, 
       borderWidth={"thin"}
       overflow={"hidden"}>
       <Stack>
+      <HStack>
         <Stack borderRadius={'20px'} bg={'white'} boxShadow={'inset 0 0 10px gray'} width={'60%'} p={2} borderTopLeftRadius={0}>
           <HStack>
               <LockIcon color={'black'} />
@@ -25,7 +26,10 @@ export default function MarketCard({ title, des, imgs = [], author, ExpiryDate, 
             <img width={'20px'} src={acceptTance.img} alt={acceptTance.img} />
             <Text fontWeight={'semibold'} color={'black'}>{acceptTance.name}</Text>
           </HStack>
+          
         </Stack>
+        <img width={"60px"} style={{margin: 'auto'}} alt="x" src={chainId===1?"https://framerusercontent.com/images/85l3B9qKcsJZISndCTY83iZik.png":"https://cryptologos.cc/logos/polygon-matic-logo.png?v=026"} />
+        </HStack>
         <Heading
           // eslint-disable-next-line react-hooks/rules-of-hooks
           color={useColorModeValue("white", "white")}

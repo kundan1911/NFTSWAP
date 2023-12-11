@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from 'react';
 // import Moralis from 'moralis';
 // import { useMoralis } from 'react-moralis';
-import { Box, Flex, Text, Icon, Grid } from '@chakra-ui/react';
+import { Box, Flex, Text, Grid } from '@chakra-ui/react';
 import Dialog from 'rc-dialog';
-import { Jazzicon } from '@ukstv/jazzicon-react';
+// import { Jazzicon } from '@ukstv/jazzicon-react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsArrowRight } from 'react-icons/bs';
 import 'rc-dialog/assets/bootstrap.css';
@@ -16,7 +16,7 @@ const NewLeft = (props) => {
     const [ nfts, setNfts ] = useState([]);
     const [  selected, setSelected ] = useState([]);
     const [formData, setFormData] = useState({});
-   
+   const [renderGetNft,setrenderGetNft]=useState(0);
     const [ isOpen, setOpen ] = useState(false);
     const openModal = () => {
         console.log("open")
@@ -50,6 +50,10 @@ const NewLeft = (props) => {
         index > -1 && setSelected(selected.slice(0, index).concat(selected.slice(index + 1, selected.length)));
     }
     
+    const updateRender=()=>{
+        console.log("rernder")
+        setrenderGetNft((prevKey) => prevKey + 1);
+    }
     return (
         <Box  width={"50%"} position={"relative"}>
         <Flex alignItems="center" gap={3}>
@@ -83,7 +87,7 @@ const NewLeft = (props) => {
           size={40}
           style={{position: 'absolute', right: "0.75rem", top: "0.75rem", fontWeight:'bold', color: 'white' ,backgroundColor:'gray', borderRadius:"999px",cursor:"pointer"}}
         />
-         <Dialog title={<span className='text-lg font-futura'>Choose Asset</span>} visible={isOpen} onClose={closeModal} animation='slide-fade' maskAnimation='fade' className='w-[800px]' style={{color:"black"}}>
+         <Dialog title={<span className='text-lg font-futura'>Choose Asset</span>} visible={isOpen} onClose={closeModal} animation='slide-fade' maskAnimation='fade' className='w-[800px]' style={{color:"black"}} onClick={updateRender}>
                 <div className='flex divide-x h-[75vh]'>
                     <div className='flex flex-col gap-3 pr-3 w-[300px]'>
                         <div>Choose a NFT assets.</div>
@@ -99,6 +103,7 @@ const NewLeft = (props) => {
                                 loadCounterNFt={false} 
                                 setFormData={setFormData}
                                 type={3}
+                                reRender={renderGetNft}
                                  />
                                 </Grid>
                             }

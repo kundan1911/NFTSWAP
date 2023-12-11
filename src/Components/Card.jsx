@@ -8,9 +8,22 @@ export default function Card(props) {
 
   const [nftImage, setNftImage] = useState(() => {
     if (nft?.image) {
-      return nft.image.includes("ipfs")
-        ? `https://ipfs.io/ipfs/${nft.image.split("ipfs://")[1]}`
-        : nft.image.split("\\")[0];
+      // console.log(nft.image.includes("ipfs"))
+      if (nft.image.startsWith("https://")) {
+        // If the URL starts with "https://", keep it as it is
+        return nft.image;}
+        else if (nft.image.startsWith("ipfs://")) {
+          // If the URL starts with "ipfs://", transform it
+          const ipfsPath = nft.image.split("ipfs://")[1];
+          return `https://ipfs.io/ipfs/${ipfsPath}`;
+        } else {
+          // Handle other cases if needed
+          return nft.image;
+        }
+
+      //
+      //   ? `https://ipfs.io/ipfs/${nft.image.split("ipfs://")[1]}`
+      //   : nft.image
     }
   });
   const handleNFTClick=(name,img)=>{

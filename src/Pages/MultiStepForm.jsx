@@ -232,7 +232,6 @@ const Form2 = ({ formData, setFormData }) => {
   const [counterAddress, setCounterAddress] = useState("");
   const [loadCounterNft, setLoadCounterNft] = useState(false);
   const [formKey, setFormKey] = useState(0);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const isValidAddress = /^0x[a-fA-F0-9]{40}$/.test(counterAddress);
@@ -598,7 +597,7 @@ export default function Multistep() {
   useEffect(()=>{console.log(Object.keys(formData).length)
 
     const num=Object.keys(formData).length
-  if(num===2){
+  if(num===3){
   toast({
     title: "Counter NFT selected",
     description: "You have Selected " + formData.frm2.name,
@@ -606,9 +605,10 @@ export default function Multistep() {
     duration: 1000,
     isClosable: true,
   });
+  console.log("whyyyyy")
 }
 
-  if(num===3){
+  if(num===4){
     toast({
       title: "Your NFT selected",
       description: "You have Selected " + formData.frm3.name,
@@ -631,6 +631,7 @@ export default function Multistep() {
       expiryDate: formData.frm1[3],
       imageUrl1: formData.frm3.nftImage,
       imageUrl2: formData.frm2.nftImage,
+      chainId:(formData.chain==="0x1"?1:2)
     })
       .then(response => {
         console.log(response.data); // Assuming the server sends back a success message

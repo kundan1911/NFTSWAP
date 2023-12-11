@@ -1,6 +1,7 @@
 import React from "react";
 import MarketCard from "../Components/MarketCards";
 import { Grid } from "@chakra-ui/react";
+import { Box, Button, Select, Stack} from "@chakra-ui/react";
 // import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from 'axios';
@@ -40,16 +41,41 @@ import axios from 'axios';
 const Posts = (props) => {
   const [postData, setPostData] = useState([]);
   const [callonce, setCall] = useState(1);
-  const  extractBeforePattern=(inputString)=> {
-    const patterns = /#(\d+)|\(\d+,\s*\d+\)/;
-    const matchIndex = inputString.search(patterns);
-    const result = matchIndex !== -1 ? inputString.slice(0, matchIndex) : inputString;
-    return result.trim(); 
-  }
-  const DisplayPostData = () => {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleSubmit=()=>{
+    console.log(selectedOption)
+   if(selectedOption!==""){
+    var chainId;
+    if(selectedOption==="ethereum")chainId=1;
+    else chainId=2
+    axios.get('https://nftbackend-2p4r.onrender.com/displayChainIdPost', {
+      params: { chainId} , // Use the updated chain value here
+    }).then(response => {
+      setPostData(response.data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+   }else{
     axios.get('https://nftbackend-2p4r.onrender.com/displayPostData')
       .then(response => {
-        setPostData(prevData => [...prevData, ...response.data]);
+        setPostData(prevData => response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+   }
+  }
+  const  extractBeforePattern=(inputString)=> {
+    const match = inputString.match(/^[a-zA-Z]+(?: [a-zA-Z]+)?/);
+  return match ? match[0] : '';
+  }
+  const DisplayPostData = () => {
+    console.log("axios post data")
+    axios.get('https://nftbackend-2p4r.onrender.com/displayPostData')
+      .then(response => {
+        setPostData(prevData => response.data);
       })
       .catch(error => {
         console.error(error);
@@ -65,6 +91,34 @@ const Posts = (props) => {
 
   return (
     <>
+    <Box width="100%" p={8} >
+      <form>
+        <Stack direction="row" spacing={4} align="center">
+          <Select
+            flex="1"
+            rounded="md"
+            size="lg"
+            bg="black"
+            borderColor="white"
+            variant="filled"
+            placeholder="Select blockchain"
+            onChange={(e) => setSelectedOption(e.target.value)}
+          >
+            <option value="polygon">Polygon</option>
+            <option value="ethereum">Ethereum</option>
+          </Select>
+          <Button
+            onClick={handleSubmit}
+            colorScheme="teal"
+            size="lg"
+            borderRadius="md"
+            w="auto" // Set width to auto to adjust based on content
+          >
+            Submit
+          </Button>
+        </Stack>
+      </form>
+    </Box>
       <Grid p={6} gap={5} templateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }}>
         {postData.map((nft) => (
           <MarketCard
@@ -77,6 +131,7 @@ const Posts = (props) => {
             value={"$ 1,000"}
             status={true}
             acceptTance={{ name: extractBeforePattern(nft.ReceiverNft), img: nft.imageUrl2 }}
+            chainId={nft.chainId}
           />
         ))}
       </Grid>

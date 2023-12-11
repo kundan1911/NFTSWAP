@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, IconButton, useDisclosure, useColorModeValue, Stack ,Button} from "@chakra-ui/react";
+import { Box, Flex, HStack, IconButton, useDisclosure, useColorModeValue, Stack } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 // import { ethers , BrowserProvider} from 'ethers';
@@ -10,16 +10,16 @@ const Links = [
   { N: "Orders", L: "/Orders" },
 ];
 
-function DrawerExample(props) {
-  const {address, isConnected, connect} = props;
-  return (
-    <div style={{ width: "100%", margin: "auto", textAlign: "end", padding: "2%" }}>
-      <Button colorScheme='teal' onClick={connect}>
-      {isConnected ? (address.slice(0,4) +"..." +address.slice(38)) : "Connect"}
-      </Button>
-    </div>
-  );
-}
+// function DrawerExample(props) {
+//   const {address, isConnected, connect} = props;
+//   return (
+//     <div style={{ width: "100%", margin: "auto", textAlign: "end", padding: "2%" }}>
+//       <Button colorScheme='teal' onClick={connect}>
+//       {isConnected ? (address.slice(0,4) +"..." +address.slice(38)) : "Connect"}
+//       </Button>
+//     </div>
+//   );
+// }
 
 
 

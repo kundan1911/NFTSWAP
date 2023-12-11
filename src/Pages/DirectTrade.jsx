@@ -128,54 +128,54 @@ axios.post('https://nftbackend-2p4r.onrender.com/saveSignedOrders', {
   }
 
 
-  const TakerSide=async (takerData,TakerAddrNFt,signedOrder)=>{
-    const { provider, signer } = await GetProvider();
-    const chainId=137
-    const nftSwapSdk = new NftSwap(provider, signer, chainId);
-console.log("taker sidde signedOrder")
-    console.log(signedOrder)
-      const walletAddressUserB = TakerAddrNFt.takerAddr;
-const assetsToSwapUserB = [takerData];
+//   const TakerSide=async (takerData,TakerAddrNFt,signedOrder)=>{
+//     const { provider, signer } = await GetProvider();
+//     const chainId=137
+//     const nftSwapSdk = new NftSwap(provider, signer, chainId);
+// console.log("taker sidde signedOrder")
+//     console.log(signedOrder)
+//       const walletAddressUserB = TakerAddrNFt.takerAddr;
+// const assetsToSwapUserB = [takerData];
     
 
-const approvalStatusForUserB = await nftSwapSdk.loadApprovalStatus(
-    assetsToSwapUserB[0],
-    walletAddressUserB
-  );
-  // If we do need to approve NFT for swapping, let's do that now
-  if (!approvalStatusForUserB.contractApproved) {
-    const approvalTx = await nftSwapSdk.approveTokenOrNftByAsset(
-      assetsToSwapUserB[0],
-      walletAddressUserB
-    );
-    const approvalTxReceipt = await approvalTx.wait();
-    console.log(
-      `Approved ${assetsToSwapUserB[0].tokenAddress} contract to swap with 0x. TxHash: ${approvalTxReceipt.transactionHash})`
-    );
-  }
-  // The final step is the taker (User B) submitting the order.
-  // The taker approves the trade transaction and it will be submitted on the blockchain for settlement.
-  // Once the transaction is confirmed, the trade will be settled and cannot be reversed.
-  const fillTx = await nftSwapSdk.fillSignedOrder(signedOrder,  { gasAmountBufferMultiple: 1.4 });
-  const fillTxReceipt = await fillTx.wait(4);
-  const filledTxnHash = fillTxReceipt.transactionHash;
-  const txnSuccess = fillTxReceipt?.status ?? 0;
-// now I make sure the txnSuccess === 1 and a hash exists to consider it a successful txn
+// const approvalStatusForUserB = await nftSwapSdk.loadApprovalStatus(
+//     assetsToSwapUserB[0],
+//     walletAddressUserB
+//   );
+//   // If we do need to approve NFT for swapping, let's do that now
+//   if (!approvalStatusForUserB.contractApproved) {
+//     const approvalTx = await nftSwapSdk.approveTokenOrNftByAsset(
+//       assetsToSwapUserB[0],
+//       walletAddressUserB
+//     );
+//     const approvalTxReceipt = await approvalTx.wait();
+//     console.log(
+//       `Approved ${assetsToSwapUserB[0].tokenAddress} contract to swap with 0x. TxHash: ${approvalTxReceipt.transactionHash})`
+//     );
+//   }
+//   // The final step is the taker (User B) submitting the order.
+//   // The taker approves the trade transaction and it will be submitted on the blockchain for settlement.
+//   // Once the transaction is confirmed, the trade will be settled and cannot be reversed.
+//   const fillTx = await nftSwapSdk.fillSignedOrder(signedOrder,  { gasAmountBufferMultiple: 1.4 });
+//   const fillTxReceipt = await fillTx.wait(4);
+//   const filledTxnHash = fillTxReceipt.transactionHash;
+//   const txnSuccess = fillTxReceipt?.status ?? 0;
+// // now I make sure the txnSuccess === 1 and a hash exists to consider it a successful txn
 
-// .wait() returns the same TransactionReceipt as .awaitTransactionHash() but the latter only waits 0-1 confirms
-// const fillTxReceipt = await nftSwapSdk.awaitTransactionHash(fillTx.hash);
-  console.log(`🎉 🥳 Order filled. TxHash: ${fillTxReceipt.transactionHash}`);
+// // .wait() returns the same TransactionReceipt as .awaitTransactionHash() but the latter only waits 0-1 confirms
+// // const fillTxReceipt = await nftSwapSdk.awaitTransactionHash(fillTx.hash);
+//   console.log(`🎉 🥳 Order filled. TxHash: ${fillTxReceipt.transactionHash}`);
 
-  }
+//   }
 
-  const tradeFun=(setsignedOrder)=>{
-    const obj={
-        "addr":"0x5556645645",
-        "price":100
-    }
-    setsignedOrder(obj);
-  }
-const DirectTrade = (props) => {
+//   const tradeFun=(setsignedOrder)=>{
+//     const obj={
+//         "addr":"0x5556645645",
+//         "price":100
+//     }
+//     setsignedOrder(obj);
+//   }
+const  DirectTrade = (props) => {
     const [ step, setStep ] = useState(1);
     const { address,isConnected } = useAccount();
     const navigate = useNavigate();
@@ -230,7 +230,7 @@ const DirectTrade = (props) => {
         </Button>
       </Flex>
       <Flex height="100%" divideX="1px">
-        <NewLeft setMakerData={setMakerData} setMakerNft={setMakerNft} walletNotConnect={isConnected} toastNotConnect={settoastNotConnect}/>
+        <NewLeft setMakerData={setMakerData} setMakerNft={setMakerNft} walletNotConnect={isConnected} toastNotConnect={settoastNotConnect} />
         <NewRight setTakerData={setTakerData} setTakerAddrNFt={setTakerAddrNFt}/>
       </Flex>
       </>
