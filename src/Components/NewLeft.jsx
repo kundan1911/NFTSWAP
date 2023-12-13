@@ -27,8 +27,9 @@ const NewLeft = (props) => {
         setOpen(true);
     };
     useEffect(()=>{
-        setOpen(false);
-        // console.log(formData)
+        // 
+        console.log("formdata")
+        console.log(formData)
         props.setMakerData({
             tokenAddress: formData.contractAddr,
             tokenId: formData.tokenId,
@@ -36,6 +37,10 @@ const NewLeft = (props) => {
 
             
         })
+        if(formData.chain){
+        props.setchainId(formData.chain)}
+        else
+        setOpen(false);
         props.setMakerNft(formData.nftImage)
     },[formData])
 

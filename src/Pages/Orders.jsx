@@ -1,12 +1,25 @@
 import OrderCard from '../Components/OrderCard';
-import { useEffect, useState } from "react";
-import { Grid ,useToast} from "@chakra-ui/react";
+import {  useState } from "react";
+import { Grid ,useToast,Text} from "@chakra-ui/react";
 import axios from 'axios';
 // import Dialog from 'rc-dialog';
 // import 'rc-dialog/assets/bootstrap.css';
-import { key } from 'localforage';
+// import { key } from 'localforage';
 import { NftSwap } from '@traderxyz/nft-swap-sdk';
 import { ethers } from "ethers";
+import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    Button,
+    Image,
+    Stack,
+    useClipboard,
+    Box
+  } from '@chakra-ui/react';
 
 const GetProvider= async ()=>{
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -18,9 +31,10 @@ const GetProvider= async ()=>{
     return {provider,signer}
   }
 
-  const TakerSide=async (takerData,takerAddr,signedOrder,toast)=>{
+  const TakerSide=async (takerData,takerAddr,signedOrder,toast,chainId)=>{
     const { provider, signer } = await GetProvider();
-    const chainId=137
+    // const chainId=chain==="0x1"?1:137
+    console.log("chainId"+chainId)
     const nftSwapSdk = new NftSwap(provider, signer, chainId);
 console.log("taker sidde signedOrder")
     console.log(signedOrder)
@@ -69,12 +83,20 @@ const approvalStatusForUserB = await nftSwapSdk.loadApprovalStatus(
 const Orders =(props)=>{
     const [OrderData, setOrderData] = useState([]);
     const toast = useToast();
-    const [SelectCardKey,setSelectCardKey]=useState(-1)
     const [callonce, setCall] = useState(1);
+    const [isOpen, setIsOpen] = useState(false);
+    const [takerImg,settakerImg]=useState("");
+    const [makerImg,setmakerImg]=useState("");
+    const [makerNftAddr,setmakerNftAddr]=useState("");
+    const [selectOrderInd,setselectOrderInd]=useState(-1);
+    const [isHovered, setIsHovered] = useState(false);
+    const { hasCopied, onCopy } = useClipboard(makerNftAddr);
+    const onClose = () => setIsOpen(false);
 
-    useEffect(()=>{
-        if(SelectCardKey!==-1){
-        const selectOrder=OrderData[SelectCardKey];
+    const onOpen = (ind) => {
+     
+        const selectOrder=OrderData[ind];
+        setselectOrderInd(ind);
         if(selectOrder.takerAddr !== props.address){
             toast({
                 title: "Incorrect Wallet Addr",
@@ -86,17 +108,33 @@ const Orders =(props)=>{
         }
         else{
         console.log(selectOrder)
-        TakerSide(JSON.parse(selectOrder.takerData),selectOrder.takerAddr,JSON.parse(selectOrder.signedOrder),toast)
-        // toast({
-        //         title: "🎉 🥳 Transaction Successful.",
-        //         // description: `TxHash: ${fillTxReceipt.transactionHash}`,
-        //         status: "success",
-        //         duration: 10000,
-        //         isClosable: true,
-        //       });
+        settakerImg(selectOrder.takerNftImg)
+        setmakerImg(selectOrder.makerNftImg)
+        setmakerNftAddr(JSON.parse(selectOrder.makerData).tokenAddress)
+        setIsOpen(true);
+        // TakerSide(JSON.parse(selectOrder.takerData),selectOrder.takerAddr,JSON.parse(selectOrder.signedOrder),toast)
         }
-    }
-    },[SelectCardKey,])
+
+      
+    
+  }
+    const handleConfirm = () => {
+      // Your logic when the confirm button is clicked
+      // You can perform actions like closing the dialog or triggering some functionality
+      const orderDetail=OrderData[selectOrderInd];
+      TakerSide(JSON.parse(orderDetail.takerData),orderDetail.takerAddr,JSON.parse(orderDetail.signedOrder),toast,orderDetail.chainId)
+      onClose();
+    };
+  
+    const handleMouseEnter = () => {
+      setIsHovered(true);
+    };
+  
+    const handleMouseLeave = () => {
+      setIsHovered(false);
+    };
+
+    
     const DisplayOrderData = () => {
         axios.get('https://nftbackend-2p4r.onrender.com/displayOrderData')
           .then(response => {
@@ -114,13 +152,81 @@ const Orders =(props)=>{
         setCall(2);
       }
 
-    return (
-        <>
+        // const ImageDialog = ({ isOpen, onClose }) => {
+  
+  return (
+    <>
+    <AlertDialog isOpen={isOpen} onClose={onClose} >
+      <AlertDialogOverlay color={"black"} >
+        <AlertDialogContent>
+          <AlertDialogHeader>Direct Swap Order</AlertDialogHeader>
+          <AlertDialogBody>
+            <Stack direction="row" spacing={12} align="center">
+              <Stack>
+              <Text margin={"auto"}>Maker NFT</Text>
+              <Image
+                src={makerImg}
+                alt="First Image"
+                boxSize="100px"
+                objectFit="cover"
+              />
+              <Text
+                  margin="auto"
+                  onClick={onCopy}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  _hover={{ cursor: 'pointer', color: 'teal' }}
+                >
+                  
+                  {makerNftAddr.slice(0, 4) + '...' + makerNftAddr.slice(38)}
+                </Text>
+                <Text>
+                {isHovered && (
+                  <Box
+                    position="relative"
+                    // top="-25px"
+                    left="50%"
+                    transform="translateX(-50%)"
+                    bgColor="teal"
+                    color="white"
+                    borderRadius="md"
+                    p={1}
+                  >
+                    {hasCopied ? 'Copied' : 'Copy'}
+                  </Box>
+                )}
+                </Text>
+
+</Stack>
+<Stack>
+              <Text margin={"auto"}>Taker NFT</Text>
+              <Image
+                src={takerImg}
+                alt="Second Image"
+                boxSize="100px"
+                objectFit="cover"
+              />
+<Text margin={"auto"}>.</Text>
+</Stack>
+            </Stack>
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Text  margin={"auto"}>
+            Do you want to confirm the order
+            </Text>
+            <Button onClick={handleConfirm} colorScheme="teal" ml={3}>
+              Confirm
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
       <Grid p={6} gap={5} templateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }}>
         {OrderData.map((order,index) => (
           <OrderCard
-            ID={index}
-            clickCard={setSelectCardKey}
+            ID={order.orderId}
+            chainId={order.chainId}
+            clickCard={() => onOpen(index)}
             connectWallectAddr={props.address}
              takerAddr={order.takerAddr}
             makerAddr={order.makerAddr}

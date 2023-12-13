@@ -23,7 +23,7 @@ const NewRight = (props) => {
     
 
     useEffect(()=>{
-        setOpen(false);
+        
         // console.log(formData)
         props.setTakerData(
             {
@@ -35,6 +35,8 @@ const NewRight = (props) => {
         props.setTakerAddrNFt(
             (prevData) => ({ ...prevData, "takerNftImg" :formData.nftImage})
         )
+        if(formData.contractAddr)
+        setOpen(false);
     },[formData])
     const openModal = () => {
         if(address===''){

@@ -29,11 +29,11 @@ const GetProvider= async ()=>{
     });
   }
 
-  const MakerSide=async (Makeraddr,makerData,takerData,TakerAddrNFt,setsignedOrder,makerNftImg,toast,navigate)=>{
+  const MakerSide=async (Makeraddr,makerData,takerData,TakerAddrNFt,setsignedOrder,makerNftImg,toast,navigate,chain)=>{
     const { provider, signer } = await GetProvider();
-   
+   console.log(chain)
     console.log(signer)
-    const chainId=137
+    const chainId=chain==="0x1"?1:137
     const nftSwapSdk = new NftSwap(provider, signer, chainId);
     console.log("makerside and taker")
     console.log(Makeraddr)
@@ -54,7 +54,7 @@ const assetsToSwapUserB = [takerData];
 console.log(walletAddressUserB)
       // Check if we need to approve the NFT for swapping
 
-      // Check if we need to approve the NFT for swapping
+//       // Check if we need to approve the NFT for swapping
       const approvalStatusForUserA = await nftSwapSdk.loadApprovalStatus(
         assetsToSwapUserA[0],
         walletAddressMaker
@@ -97,10 +97,13 @@ console.log(signedOrder)
 // }
 const signedOrderString = JSON.stringify(signedOrder);
 const signedtakerString = JSON.stringify(takerData);
+const signedmakerString = JSON.stringify(makerData);
 axios.post('https://nftbackend-2p4r.onrender.com/saveSignedOrders', {
     orderId:generateUniqueId(),
+    chainId:chainId,
   signedOrder: signedOrderString,
   takerData:signedtakerString,
+  makerData:signedmakerString,
   makerAddr:Makeraddr,
   makerNftImg:makerNftImg,
   takerAddr: TakerAddrNFt.takerAddr,
@@ -181,6 +184,7 @@ const  DirectTrade = (props) => {
     const navigate = useNavigate();
     const toast=useToast()
     const [makerData,setMakerData]=useState({})
+    const [chainId,setchainId]=useState("")
     const [makerNftImg,setMakerNft]=useState({})
     const [takerData,setTakerData]=useState({})
     const [TakerAddrNFt,setTakerAddrNFt]=useState({})
@@ -223,14 +227,14 @@ const  DirectTrade = (props) => {
         </Box>
         <Button onClick={() => {
             if(step===2){
-                MakerSide(address,makerData,takerData,TakerAddrNFt,setsignedOrder,makerNftImg,toast,navigate)
+                MakerSide(address,makerData,takerData,TakerAddrNFt,setsignedOrder,makerNftImg,toast,navigate,chainId)
             }
             setStep(3 - step)}} px={10} py={3} bg="green.400" fontFamily="futura">
           {step === 1 ? 'NEXT' : 'Pay'}
         </Button>
       </Flex>
       <Flex height="100%" divideX="1px">
-        <NewLeft setMakerData={setMakerData} setMakerNft={setMakerNft} walletNotConnect={isConnected} toastNotConnect={settoastNotConnect} />
+        <NewLeft setMakerData={setMakerData} setMakerNft={setMakerNft} walletNotConnect={isConnected} toastNotConnect={settoastNotConnect} setchainId={setchainId}/>
         <NewRight setTakerData={setTakerData} setTakerAddrNFt={setTakerAddrNFt}/>
       </Flex>
       </>

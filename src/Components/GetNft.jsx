@@ -13,7 +13,7 @@ const getid=async (cnt,setChainId,type)=>{
 
   console.log(res)
   // setChainId(res)  
-  if(type===2)
+  if(type===2 || type===3)
 setChainId(((prevData) => ({ ...prevData, "chain" :res})))
   return res
 }
