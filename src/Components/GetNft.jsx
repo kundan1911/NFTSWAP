@@ -26,9 +26,9 @@ export default function GetNfts(props) {
   var { address, connector, isConnected } = useAccount();
   if (props.loadCounterNFt === true) {
     address = props.address;
-    route = "https://nftbackend-2p4r.onrender.com/getContractNFTs";
+    route = "http://localhost:5001/getContractNFTs";
   } else {
-    route = "https://nftbackend-2p4r.onrender.com/getnfts";
+    route = "http://localhost:5001/getnfts";
 
     if (props.counterAddr === 2) {
       address = props.address;

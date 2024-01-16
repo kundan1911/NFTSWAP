@@ -136,7 +136,7 @@ const Orders =(props)=>{
 
     
     const DisplayOrderData = () => {
-        axios.get('https://nftbackend-2p4r.onrender.com/displayOrderData')
+        axios.get('http://localhost:5001/displayOrderData')
           .then(response => {
             console.log(JSON.parse(response.data[0].signedOrder))
             setOrderData(prevData => [...prevData, ...response.data]);

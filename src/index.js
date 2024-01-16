@@ -22,6 +22,9 @@ const theme = extendTheme({
   //     }
   //   })
   // },
+  fonts: {
+    body:  "Proto Mono, Helvetica, Arial, sans-serif", // Replace 'YourCustomFont' with the desired font
+  },
   colors,
   styles: {
     global: {

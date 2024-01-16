@@ -1,9 +1,21 @@
 import React from "react";
 import MarketCard from "../Components/MarketCards";
 import { Grid } from "@chakra-ui/react";
-import { Box, Button, Select, Stack} from "@chakra-ui/react";
-// import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, Button, Select, Stack , useDisclosure} from "@chakra-ui/react";
+import {
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+} from '@chakra-ui/react';
+
+import { useState ,useRef} from "react";
 import axios from 'axios';
 
 // import { ethers } from 'ethers';
@@ -38,6 +50,105 @@ import axios from 'axios';
 //     console.log(signer.address)
 // }
 // }
+
+// function DrawerExample() {
+//   const { isOpen, onOpen, onClose } = useDisclosure();
+//   const btnRef = useRef();
+//   const [formData, setFormData] = useState({
+//     email: '',
+//     username: '',
+//     bio: '',
+//   });
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   const handleSubmit = () => {
+//     // Implement your logic to submit the form data (e.g., send to backend)
+//     // Close the sidebar after submission
+//     console.log(for)
+//     onClose();
+//   };
+
+
+
+//   /* ATTENTION 
+
+//   if you wann understand how the not showing logic work then check Navabar.jsx 66-76 lines
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⢀⣴⣷⣄⠀⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⢴⣿⣿⣿⣿⣿⣏⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⠀⠈⠿⣿⣿⣿⣿⣷⣄⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀
+// ⠀⢀⣴⣧⣄⠀⠀⠀⠀⠙⢻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠉⠿⣿⣿⣿⣿⣷⣄⠀
+// ⢴⣿⣿⣿⣿⣶⣀⠀⠀⠀⠀⢘⣿⣿⣿⣿⣿⣿⣏⠀⠀⠀⠀⠉⠿⣿⣿⣿⣿⡷
+// ⠀⠙⠿⣿⣿⣿⣿⣶⣄⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠉⠻⡿⠋⠀
+// ⠀⠀⠀⠉⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠘⢻⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⢉⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⠀⠉⢿⡿⠋⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢴⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+// */
+
+//   return (
+//     <div style={{ width: "100%", margin: "auto", textAlign: "end", padding: "2%" }}>
+//       <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+//         Connect wallet
+//       </Button>
+//       <Drawer isOpen={isOpen} placement="right" onClose={onClose} >
+//       <DrawerOverlay />
+//       <DrawerContent color={"black"}>
+//         <DrawerCloseButton />
+//         <DrawerHeader>Create Profile</DrawerHeader>
+
+//         <DrawerBody>
+//           <FormControl mb={4}>
+//             <FormLabel>Email</FormLabel>
+//             <Input
+//               type="email"
+//               name="email"
+//               value={formData.email}
+//               onChange={handleChange}
+//               placeholder="Enter your email"
+//             />
+//           </FormControl>
+
+//           <FormControl mb={4}>
+//             <FormLabel>Username</FormLabel>
+//             <Input
+//               type="text"
+//               name="username"
+//               value={formData.username}
+//               onChange={handleChange}
+//               placeholder="Enter your username"
+//             />
+//           </FormControl>
+
+//           <FormControl mb={4}>
+//             <FormLabel>Bio</FormLabel>
+//             <Textarea
+//               name="bio"
+//               value={formData.bio}
+//               onChange={handleChange}
+//               placeholder="Enter your bio"
+//             />
+//           </FormControl>
+
+//           <Button colorScheme="teal" onClick={handleSubmit}>
+//             Save
+//           </Button>
+//         </DrawerBody>
+//       </DrawerContent>
+//     </Drawer>
+//     </div>
+//   );
+// }
+
 const Posts = (props) => {
   const [postData, setPostData] = useState([]);
   const [callonce, setCall] = useState(1);
@@ -49,7 +160,7 @@ const Posts = (props) => {
     var chainId;
     if(selectedOption==="ethereum")chainId=1;
     else chainId=2
-    axios.get('https://nftbackend-2p4r.onrender.com/displayChainIdPost', {
+    axios.get('http://localhost:5001/displayChainIdPost', {
       params: { chainId} , // Use the updated chain value here
     }).then(response => {
       setPostData(response.data);
@@ -58,7 +169,7 @@ const Posts = (props) => {
       console.error(error);
     });
    }else{
-    axios.get('https://nftbackend-2p4r.onrender.com/displayPostData')
+    axios.get('http://localhost:5001/displayPostData')
       .then(response => {
         setPostData(prevData => response.data);
       })
@@ -73,7 +184,7 @@ const Posts = (props) => {
   }
   const DisplayPostData = () => {
     console.log("axios post data")
-    axios.get('https://nftbackend-2p4r.onrender.com/displayPostData')
+    axios.get('http://localhost:5001/displayPostData')
       .then(response => {
         setPostData(prevData => response.data);
       })

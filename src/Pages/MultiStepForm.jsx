@@ -625,7 +625,7 @@ export default function Multistep() {
     console.log(allFormData);
     // Perform any action with the complete form data
 
-    axios.post('https://nftbackend-2p4r.onrender.com/savePostData', {
+    axios.post('http://localhost:5001/savePostData', {
       SenderNft: formData.frm3.name,
       ReceiverNft: formData.frm2.name,
       expiryDate: formData.frm1[3],
