@@ -50,50 +50,48 @@ const ProfilePage = (props) => {
     setCall(2);
   }
 
-  return (
-    <Center p="4" backgroundColor={"rgb(4 40 111)"}
-    margin= "15px"
-    borderRadius= "2rem">
-      <Stack direction={{ base: 'column', md: 'row' }} spacing={8} align="center">
-        {/* User Image */}
-        <Avatar size="xl" name={userData.username} src="url_to_user_image" />
+  return (<Center p="4" backgroundColor="rgb(4 40 111)" margin="15px" borderRadius="2rem">
+  <Stack direction={{ base: 'column', md: 'row' }} spacing={8} align="center">
+    {/* User Image */}
+    <Avatar size="xl" name={userData.username} src="url_to_user_image" />
 
-        {/* User Details */}
-        <Stack spacing={4} align="start">
-          <Heading size="lg">{userData.username}</Heading>
+    {/* User Details */}
+    <Stack spacing={4} align="start" maxW={{ base: '100%', md: '700px' }} w="100%" wordBreak="break-word">
+      <Heading size="lg">{userData.username}</Heading>
 
-          <Box>
-            <Text fontSize="md" fontWeight="bold" mb="2">
-              Wallet Address
-            </Text>
-            <HStack>
-              <Text>{userData.walletAddr}</Text>
-              <Tooltip label={hasCopied ? 'Copied!' : 'Copy to Clipboard'} placement="top">
-                <IconButton
-                  aria-label="Copy to Clipboard"
-                  icon={<CopyIcon />}
-                  onClick={onCopy}
-                />
-              </Tooltip>
-            </HStack>
-          </Box>
+      <Box>
+        <Text fontSize="md" fontWeight="bold" mb="2">
+          Wallet Address
+        </Text>
+        <HStack>
+          <Text>{userData.walletAddr}</Text>
+          <Tooltip label={hasCopied ? 'Copied!' : 'Copy to Clipboard'} placement="top">
+            <IconButton
+              aria-label="Copy to Clipboard"
+              icon={<CopyIcon />}
+              onClick={onCopy}
+            />
+          </Tooltip>
+        </HStack>
+      </Box>
 
-          <Box>
-            <Text fontSize="md" fontWeight="bold" mb="2">
-              Email
-            </Text>
-            <Text>{userData.email}</Text>
-          </Box>
+      <Box>
+        <Text fontSize="md" fontWeight="bold" mb="2">
+          Email
+        </Text>
+        <Text>{userData.email}</Text>
+      </Box>
 
-          <Box>
-            <Text fontSize="md" fontWeight="bold" mb="2">
-              Bio
-            </Text>
-            <Text>{userData.bio}</Text>
-          </Box>
-        </Stack>
-      </Stack>
-    </Center>
+      <Box>
+        <Text fontSize="md" fontWeight="bold" mb="2">
+          Bio
+        </Text>
+        <Text>{userData.bio}</Text>
+      </Box>
+    </Stack>
+  </Stack>
+</Center>
+
   );
 };
 
