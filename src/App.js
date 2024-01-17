@@ -38,7 +38,7 @@ function App() {
         <Route exact path="/create-post" element={<Multistep/>}/>
         <Route exact path="/Posts" element={<Posts />}/>
         <Route exact path="/Orders" element={<Orders address={address} />}/>
-        <Route exact path="/Profile" element={<Profile/>}/>
+        <Route exact path="/Profile" element={<Profile address={address}/>}/>
       </Routes>
     </Router>
   );

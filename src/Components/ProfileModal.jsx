@@ -9,8 +9,10 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+// import { useToast } from "@chakra-ui/react";
 
 const ProfileModal = ({ isOpen, onClose, username, onProfileClick }) => {
+    // const toast = useToast();
   return (
     <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInRight">
       <ModalOverlay />
@@ -30,7 +32,7 @@ const ProfileModal = ({ isOpen, onClose, username, onProfileClick }) => {
         </ModalFooter>
       </ModalContent>
     </Modal>
-  );
+  );    
 };
 
 export default ProfileModal;

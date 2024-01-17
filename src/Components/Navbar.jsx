@@ -31,7 +31,7 @@ const Links = [
   { N: "Direct Swap", L: "/DirectTrade" },
   { N: "Posts", L: "/Posts" },
   { N: "Orders", L: "/Orders" },
-  { N: "Your Profile", L: "/Profile" },
+ 
 ];
 
 // function DrawerExample(props) {
@@ -200,6 +200,7 @@ const NavLink = (props) => {
 export default function Navbar(props) {
   const { isOpen, onOpen: onMainOpen, onClose: onMainClose } = useDisclosure(); // Renamed for clarity
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
+  const toast=useToast()
   const { address, connector, isConnected } = useAccount();
   const navigate = useNavigate();
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
@@ -225,6 +226,15 @@ export default function Navbar(props) {
 
   const handleProfileClick = () => {
     // Implement navigation logic to your profile page
+    if(isConnected===false){
+      toast({
+        title: "WALLET NOT CONNECTED",
+        description: "please connect wallet to view profile",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }else
     navigate('/Profile');
     console.log('Viewing profile...');
   };
@@ -279,16 +289,7 @@ export default function Navbar(props) {
                 <button className='bn30'>Contact Us</button>
               </a>
 
-              <Button
-        onClick={() => setIsProfileModalOpen(true)}
-        _hover={{ bgColor: 'teal.500' }}
-        _active={{ bgColor: 'teal.700' }}
-        style={{position: "absolute",
-          right: "22px"}}
-      >
-        Your Profile
-      </Button>
-      <ProfileModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} username={formData.username} onProfileClick={handleProfileClick} />
+            
          
             </HStack>
           </HStack>
@@ -308,6 +309,7 @@ export default function Navbar(props) {
         {isOpen ? (
           <Box pb={4} display={{ lg: "none" }}>
             <Stack as={"nav"} spacing={4}>
+            
               {
               
               Links.map((link) => (
@@ -322,7 +324,19 @@ export default function Navbar(props) {
 
       </Box>
       <DrawerExample isOpen={isModalOpen} onOpen={onModalOpen} onClose={onModalClose} addr={address}  />
+      <div style={{ display: "inline-flex" }}>
       <ConnectButton />
+      <Button
+        onClick={() => setIsProfileModalOpen(true)}
+        _hover={{ bgColor: 'teal.500' }}
+        _active={{ bgColor: 'teal.700' }}
+       style={{position:"absolute",
+      right:"20px"}}
+      >
+        Your Profile
+      </Button>
+      <ProfileModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} username={formData.username} onProfileClick={handleProfileClick} />
+      </div>
     </>
   );
 }
