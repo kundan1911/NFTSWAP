@@ -94,7 +94,7 @@ function DrawerExample(props) {
     // Close the sidebar after submission
 
     console.log(formData);
-    axios.post('http://localhost:5001/createUserAccount', {
+    axios.post('https://nftbackend-2p4r.onrender.com/createUserAccount', {
       username:formData.username,
       email:formData.email,
       walletAddr:props.addr?props.addr:"not known", 
@@ -244,7 +244,7 @@ export default function Navbar(props) {
       // if(isConnected){
         console.log(address);
       // address="fdfd"
-        const userDetails = await axios.get('http://localhost:5001/getUserAccountDetail', {
+        const userDetails = await axios.get('https://nftbackend-2p4r.onrender.com/getUserAccountDetail', {
           params: { walletAddr:address} , // Use the updated chain value here
         });
         console.log(userDetails.data[0]);

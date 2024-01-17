@@ -31,7 +31,7 @@ const ProfilePage = (props) => {
     const fetchUserData = async () => {
       try {
         // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-        const userDetails = await axios.get('http://localhost:5001/getUserAccountDetail', {
+        const userDetails = await axios.get('https://nftbackend-2p4r.onrender.com/getUserAccountDetail', {
             params: { walletAddr:props.address} , // Use the updated chain value here
           });
 

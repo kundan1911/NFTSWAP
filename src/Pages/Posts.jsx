@@ -160,7 +160,7 @@ const Posts = (props) => {
     var chainId;
     if(selectedOption==="ethereum")chainId=1;
     else chainId=2
-    axios.get('http://localhost:5001/displayChainIdPost', {
+    axios.get('https://nftbackend-2p4r.onrender.com/displayChainIdPost', {
       params: { chainId} , // Use the updated chain value here
     }).then(response => {
       setPostData(response.data);
@@ -169,7 +169,7 @@ const Posts = (props) => {
       console.error(error);
     });
    }else{
-    axios.get('http://localhost:5001/displayPostData')
+    axios.get('https://nftbackend-2p4r.onrender.com/displayPostData')
       .then(response => {
         setPostData(prevData => response.data);
       })
@@ -184,7 +184,7 @@ const Posts = (props) => {
   }
   const DisplayPostData = () => {
     console.log("axios post data")
-    axios.get('http://localhost:5001/displayPostData')
+    axios.get('https://nftbackend-2p4r.onrender.com/displayPostData')
       .then(response => {
         setPostData(prevData => response.data);
       })
